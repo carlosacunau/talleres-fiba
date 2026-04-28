@@ -34,6 +34,22 @@ body {
 .container.narrow { max-width: 720px; }
 
 .hero { margin-bottom: 64px; }
+.logo-link {
+  display: inline-block;
+  margin-bottom: 32px;
+  transition: opacity 0.2s;
+}
+.logo-link:hover { opacity: 0.8; }
+.logo {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+.thanks .logo-link { margin-bottom: 40px; }
+.thanks .logo { margin: 0 auto; }
+.form-header .logo-link { margin-bottom: 24px; }
+.form-header .logo { height: 40px; }
+
 .eyebrow {
   font-family: "Fira Code", monospace;
   font-size: 12px;
