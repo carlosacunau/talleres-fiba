@@ -555,7 +555,9 @@
           const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
           const mimes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg;codecs=opus'];
           const mime = mimes.find(m => MediaRecorder.isTypeSupported(m)) || '';
-          mediaRecorder = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream);
+          // Voice-quality bitrate. 32 kbps opus is intelligible for speech (~240 KB/min).
+          const recorderOpts = mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : { audioBitsPerSecond: 32000 };
+          mediaRecorder = new MediaRecorder(stream, recorderOpts);
           chunks = [];
           startTime = Date.now();
 
@@ -665,7 +667,8 @@
           for (let i = 0; i < entries.length; i++) {
             const entry = entries[i];
             uploadedCount++;
-            submitBtn.textContent = `Subiendo audio ${uploadedCount}/${totalAudios}…`;
+            const sizeMB = (entry.blob.size / (1024*1024)).toFixed(1);
+            submitBtn.textContent = `Subiendo audio ${uploadedCount}/${totalAudios} (${sizeMB} MB)…`;
 
             const base64 = await blobToBase64(entry.blob);
             const ext = guessExt(entry.mime);
