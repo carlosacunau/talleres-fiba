@@ -27,6 +27,23 @@
     <form id="apply-form">
       <input type="hidden" name="cohort" value="chile-1">
 
+      <!-- DATOS DE CONTACTO -->
+      <section class="section">
+        <p class="section-eyebrow">Para empezar</p>
+        <h2>Tus datos</h2>
+
+        <div class="field">
+          <label for="contact_name">Tu nombre <span class="required">*</span></label>
+          <input id="contact_name" type="text" name="contact_name" required>
+        </div>
+
+        <div class="field">
+          <label for="contact_email">Tu correo <span class="required">*</span></label>
+          <span class="hint">A este correo te enviaré toda la información relacionada al workshop.</span>
+          <input id="contact_email" type="email" name="contact_email" required>
+        </div>
+      </section>
+
       <!-- SECCIÓN 1 -->
       <section class="section">
         <p class="section-eyebrow">Sección 1 de 5</p>
@@ -294,16 +311,6 @@
           <div class="audio-attachments"></div>
         </div>
 
-        <div class="field">
-          <label for="contact_email">Tu correo <span class="required">*</span></label>
-          <span class="hint">A este correo te enviaré toda la información relacionada al workshop.</span>
-          <input id="contact_email" type="email" name="contact_email" required>
-        </div>
-
-        <div class="field">
-          <label for="contact_name">Tu nombre <span class="required">*</span></label>
-          <input id="contact_name" type="text" name="contact_name" required>
-        </div>
       </section>
 
       <div class="submit-row">
