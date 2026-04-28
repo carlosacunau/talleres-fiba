@@ -1,0 +1,311 @@
+:root {
+  --bg: #0A0A14;
+  --surface: #18181B;
+  --recessed: #4C2D91;
+  --accent: #8B5CF6;
+  --text: #E8E4F0;
+  --muted: #9A93A8;
+  --ghost: #F0EFF4;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Fira+Code:wght@400;500&display=swap');
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 24px 96px;
+}
+.container.narrow { max-width: 720px; }
+
+.hero { margin-bottom: 64px; }
+.eyebrow {
+  font-family: "Fira Code", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+h1 {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.lead {
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 540px;
+}
+
+h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cohort-card {
+  display: block;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.cohort-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -20px var(--accent);
+}
+.cohort-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.cohort-date {
+  font-family: "Fira Code", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: "Fira Code", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.badge-active {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+.cohort-card p { color: var(--muted); margin-bottom: 24px; }
+.cta {
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.footer {
+  margin-top: 96px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-family: "Fira Code", monospace;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ============ FORM PAGE ============ */
+
+.form-header {
+  margin-bottom: 56px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.form-header h1 {
+  font-size: clamp(36px, 6vw, 56px);
+  margin-bottom: 24px;
+}
+.form-header .lead { font-size: 18px; }
+.form-meta {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-family: "Fira Code", monospace;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.form-meta span { padding: 6px 12px; background: var(--surface); border-radius: 6px; }
+
+.section {
+  margin-bottom: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.section:first-of-type { border-top: none; padding-top: 0; }
+.section-eyebrow {
+  font-family: "Fira Code", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.section h2 {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+.field { margin-bottom: 32px; }
+.field label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.field .hint {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.field .why {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .field-grid { grid-template-columns: 1fr; }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 16px;
+  transition: border-color 0.2s, background 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(139, 92, 246, 0.04);
+}
+textarea { min-height: 120px; resize: vertical; line-height: 1.5; }
+textarea.tall { min-height: 180px; }
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.options label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.options label:hover { border-color: var(--border-strong); }
+.options input[type="radio"],
+.options input[type="checkbox"] {
+  margin-top: 4px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+}
+.options input[type="radio"]:checked + span,
+.options input[type="checkbox"]:checked + span { color: var(--accent); }
+.options label:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(139, 92, 246, 0.06);
+}
+
+.subfields {
+  margin-top: 16px;
+  padding: 20px;
+  background: rgba(139, 92, 246, 0.04);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+}
+.subfields .field { margin-bottom: 16px; }
+.subfields .field:last-child { margin-bottom: 0; }
+.subfields label { font-size: 14px; color: var(--muted); }
+
+.submit-row { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--border); }
+button.submit {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 12px;
+  padding: 18px 32px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+button.submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px var(--accent);
+}
+button.submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.status { margin-top: 16px; font-size: 14px; color: var(--muted); text-align: center; }
+.status.error { color: #ff7a85; }
+
+.required { color: var(--accent); }
+
+/* Thank you page */
+.thanks {
+  text-align: center;
+  padding: 96px 24px;
+}
+.thanks h1 { margin-bottom: 24px; }
+.thanks .lead { margin: 0 auto 40px; max-width: 480px; }
+.thanks a {
+  color: var(--accent);
+  text-decoration: none;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.thanks a:hover { text-decoration: underline; }

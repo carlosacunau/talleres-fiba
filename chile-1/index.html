@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicar · Taller Chile · Fiba Labs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <main class="container narrow">
+    <header class="form-header">
+      <p class="eyebrow">Fiba Labs · Talleres</p>
+      <h1>Taller Chile · Cohorte 1</h1>
+      <p class="lead">Para que el taller te sirva de verdad, necesito conocer tu negocio antes de empezar. Con esto te llevo skills personalizados al primer día, no plantillas genéricas.</p>
+      <div class="form-meta">
+        <span>15 preguntas</span>
+        <span>~10 minutos</span>
+        <span>Tuteo, en confianza</span>
+      </div>
+    </header>
+
+    <form id="apply-form">
+      <input type="hidden" name="cohort" value="chile-1">
+
+      <!-- SECCIÓN 1 -->
+      <section class="section">
+        <p class="section-eyebrow">Sección 1 de 5</p>
+        <h2>Tu negocio</h2>
+
+        <div class="field">
+          <label>1. Nombre de la empresa, sitio web e industria <span class="required">*</span></label>
+          <span class="hint">Cuéntame en una frase qué hace tu empresa, como se la describirías a alguien que no es del rubro.</span>
+          <div class="field-grid">
+            <input type="text" name="q1_empresa" placeholder="Nombre" required>
+            <input type="text" name="q1_web" placeholder="Sitio web">
+            <input type="text" name="q1_industria" placeholder="Industria" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="q2">2. ¿Cuántas personas son en el equipo, contándote a ti? <span class="required">*</span></label>
+          <span class="hint">Si hay gente part-time o externa fija (contador, diseñador), cuéntalos también.</span>
+          <input id="q2" type="text" name="q2_equipo" placeholder="Ej: 6 full-time + contador externo" required>
+        </div>
+
+        <div class="field">
+          <label for="q3">3. ¿Quién es tu cliente típico y cómo te genera plata el negocio? <span class="required">*</span></label>
+          <span class="hint">Si tuvieras que dividir tus ingresos en tres categorías, ¿cuáles serían y cuánto pesa cada una?</span>
+          <textarea id="q3" name="q3_cliente_modelo" required></textarea>
+        </div>
+
+        <div class="field">
+          <label>4. ¿Cómo llegan los clientes a ti hoy? <span class="required">*</span></label>
+          <span class="hint">Marca todos los que apliquen.</span>
+          <div class="options">
+            <label><input type="checkbox" name="q4_canales" value="referidos"><span>Referidos / boca a boca</span></label>
+            <label><input type="checkbox" name="q4_canales" value="pauta"><span>Pauta / publicidad pagada</span></label>
+            <label><input type="checkbox" name="q4_canales" value="contenido"><span>Contenido en redes sociales</span></label>
+            <label><input type="checkbox" name="q4_canales" value="seo"><span>Posicionamiento web (SEO)</span></label>
+            <label><input type="checkbox" name="q4_canales" value="outreach"><span>Outreach por correo / cold email</span></label>
+            <label><input type="checkbox" name="q4_canales" value="eventos"><span>Eventos / networking</span></label>
+          </div>
+          <input type="text" name="q4_otro" placeholder="Otro (opcional)" style="margin-top: 12px;">
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2 -->
+      <section class="section">
+        <p class="section-eyebrow">Sección 2 de 5</p>
+        <h2>Dónde vive la información</h2>
+
+        <div class="field">
+          <label for="q5">5. ¿Qué herramientas usas a diario para operar el negocio? <span class="required">*</span></label>
+          <span class="hint">Vamos por categorías: correo, CRM o ventas, contabilidad, gestión de proyectos, almacenamiento, mensajería interna, banco. Si te acuerdas del nombre exacto, mejor.</span>
+          <textarea id="q5" name="q5_herramientas" class="tall" placeholder="Correo: Gmail&#10;CRM: HubSpot&#10;Contabilidad: Defontana&#10;..." required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="q6">6. ¿Dónde vive la información más importante de tu negocio? <span class="required">*</span></label>
+          <span class="hint">La que si la perdieras dolería más. Piensa: si tu disco duro se perdiera mañana, ¿qué tres cosas serían las más difíciles de reconstruir?</span>
+          <textarea id="q6" name="q6_info_critica" required></textarea>
+        </div>
+
+        <div class="field">
+          <label>7. ¿Con qué proveedor tienes tu correo de empresa? <span class="required">*</span></label>
+          <div class="options">
+            <label><input type="radio" name="q7_correo" value="google" required><span>Google (Gmail / Workspace)</span></label>
+            <label><input type="radio" name="q7_correo" value="microsoft"><span>Microsoft (Outlook / 365)</span></label>
+            <label><input type="radio" name="q7_correo" value="otro"><span>Otro</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>8. ¿Qué computador vas a usar en el taller? <span class="required">*</span></label>
+          <div class="options">
+            <label><input type="radio" name="q8_computador" value="mac" required><span>Mac</span></label>
+            <label><input type="radio" name="q8_computador" value="windows"><span>Windows</span></label>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3 -->
+      <section class="section">
+        <p class="section-eyebrow">Sección 3 de 5</p>
+        <h2>Qué necesitas del taller</h2>
+        <p class="hint" style="margin-bottom: 32px;">Estas respuestas determinan qué skills voy a construir antes del taller para tu negocio. Mientras más concreto, mejor.</p>
+
+        <div class="field">
+          <label for="q9">9. Describe en detalle UNA tarea que haces cada semana donde una IA bien configurada te haría la vida más fácil. <span class="required">*</span></label>
+          <span class="hint">Llévame por la última vez que hiciste esto. Si tuvieras que enseñarle a alguien nuevo, ¿qué le dirías?</span>
+          <div class="subfields">
+            <div class="field">
+              <label for="q9a">¿Qué disparador la inicia? (un día, un evento, un correo)</label>
+              <input id="q9a" type="text" name="q9_trigger" required>
+            </div>
+            <div class="field">
+              <label for="q9b">¿De dónde sacas la información de input?</label>
+              <input id="q9b" type="text" name="q9_inputs" required>
+            </div>
+            <div class="field">
+              <label for="q9c">¿Cuál es el proceso paso a paso?</label>
+              <textarea id="q9c" name="q9_proceso" required></textarea>
+            </div>
+            <div class="field">
+              <label for="q9d">¿Cuál es el output final? (correo, documento, planilla, mensaje)</label>
+              <input id="q9d" type="text" name="q9_output" required>
+            </div>
+            <div class="field">
+              <label for="q9e">¿Cuánto tiempo te toma cada vez? ¿Cada cuánto la haces?</label>
+              <input id="q9e" type="text" name="q9_tiempo" placeholder="Ej: 2 horas, todos los lunes" required>
+            </div>
+          </div>
+          <span class="why">Con esto te construyo un skeleton de skill ANTES del taller, listo para conectarlo con tu data real en el Módulo 2.</span>
+        </div>
+
+        <div class="field">
+          <label for="q10">10. Describe UNA segunda tarea donde necesitas ayuda. <span class="required">*</span></label>
+          <span class="hint">Si la primera fue la que más te pesa, esta puede ser la segunda más pesada o la que crees que sería más fácil de mejorar.</span>
+          <div class="subfields">
+            <div class="field">
+              <label for="q10a">¿Qué disparador la inicia?</label>
+              <input id="q10a" type="text" name="q10_trigger" required>
+            </div>
+            <div class="field">
+              <label for="q10b">¿De dónde sacas la información de input?</label>
+              <input id="q10b" type="text" name="q10_inputs" required>
+            </div>
+            <div class="field">
+              <label for="q10c">¿Cuál es el proceso paso a paso?</label>
+              <textarea id="q10c" name="q10_proceso" required></textarea>
+            </div>
+            <div class="field">
+              <label for="q10d">¿Cuál es el output final?</label>
+              <input id="q10d" type="text" name="q10_output" required>
+            </div>
+            <div class="field">
+              <label for="q10e">¿Cuánto tiempo te toma? ¿Cada cuánto la haces?</label>
+              <input id="q10e" type="text" name="q10_tiempo" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="q11">11. ¿Hay una TERCERA tarea que valga la pena mencionar? (opcional)</label>
+          <span class="hint">No te preocupes si no se te ocurre una tercera, dos buenas son suficientes.</span>
+          <div class="subfields">
+            <div class="field">
+              <label for="q11a">¿Qué disparador la inicia?</label>
+              <input id="q11a" type="text" name="q11_trigger">
+            </div>
+            <div class="field">
+              <label for="q11b">¿De dónde sacas la información de input?</label>
+              <input id="q11b" type="text" name="q11_inputs">
+            </div>
+            <div class="field">
+              <label for="q11c">¿Cuál es el proceso paso a paso?</label>
+              <textarea id="q11c" name="q11_proceso"></textarea>
+            </div>
+            <div class="field">
+              <label for="q11d">¿Cuál es el output final?</label>
+              <input id="q11d" type="text" name="q11_output">
+            </div>
+            <div class="field">
+              <label for="q11e">¿Cuánto tiempo te toma? ¿Cada cuánto la haces?</label>
+              <input id="q11e" type="text" name="q11_tiempo">
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="q12">12. ¿Qué reportes o resúmenes armas manualmente hoy? <span class="required">*</span></label>
+          <span class="hint">Semanales, mensuales, para directorio, para ti mismo. Cualquier documento que armas regularmente juntando datos de varios lados.</span>
+          <textarea id="q12" name="q12_reportes" required></textarea>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4 -->
+      <section class="section">
+        <p class="section-eyebrow">Sección 4 de 5</p>
+        <h2>Visibilidad</h2>
+
+        <div class="field">
+          <label for="q13">13. Si pudieras tener UN dashboard que te muestre el estado del negocio en 30 segundos, ¿qué tres cosas necesitas ver? <span class="required">*</span></label>
+          <span class="hint">Piensa en lo primero que mirarías el lunes por la mañana al sentarte. ¿Caja? ¿Pipeline? ¿Proyectos en curso? ¿Clientes en riesgo?</span>
+          <textarea id="q13" name="q13_dashboard" placeholder="1.&#10;2.&#10;3." required></textarea>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5 -->
+      <section class="section">
+        <p class="section-eyebrow">Sección 5 de 5</p>
+        <h2>Conceptos y cierre</h2>
+
+        <div class="field">
+          <label>14. ¿Cuáles de estos conceptos ya conoces o has usado? <span class="required">*</span></label>
+          <span class="hint">Marca todos los que apliquen. Esto calibra el video previo de 20 minutos.</span>
+          <div class="options">
+            <label><input type="checkbox" name="q14_conceptos" value="llm"><span>LLM (Large Language Model)</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="modelo"><span>Modelo (Sonnet, Opus, Haiku, GPT-5, Codex, Gemini Pro/Flash, Nano Banana, Sora, etc.)</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="prompt"><span>Prompt</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="contexto"><span>Contexto / context window</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="anthropic"><span>Anthropic</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="openai"><span>OpenAI</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="cowork"><span>Claude Cowork</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="notebooklm"><span>NotebookLM</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="skill"><span>Skill</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="markdown"><span>Formato markdown (.md)</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="sandbox"><span>Sandbox</span></label>
+            <label><input type="checkbox" name="q14_conceptos" value="rag"><span>RAG (Retrieval Augmented Generation)</span></label>
+          </div>
+          <textarea name="q14_dudas" placeholder="¿Hay conceptos de IA que te confunden o que escuchaste y quieres que aclare en el video previo? (opcional)" style="margin-top: 16px; min-height: 80px;"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="q15">15. ¿Hay algo más que crees que debería saber antes del taller?</label>
+          <span class="hint">Cualquier cosa: limitaciones, miedos, expectativas, cosas que probaste antes y no funcionaron.</span>
+          <textarea id="q15" name="q15_extra"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="contact_email">Tu correo <span class="required">*</span></label>
+          <span class="hint">Para confirmarte el cupo y mandarte el video previo.</span>
+          <input id="contact_email" type="email" name="contact_email" required>
+        </div>
+
+        <div class="field">
+          <label for="contact_name">Tu nombre <span class="required">*</span></label>
+          <input id="contact_name" type="text" name="contact_name" required>
+        </div>
+      </section>
+
+      <div class="submit-row">
+        <button type="submit" class="submit" id="submit-btn">Enviar aplicación</button>
+        <p class="status" id="status"></p>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const ENDPOINT = 'REPLACE_WITH_APPS_SCRIPT_URL';
+
+    const form = document.getElementById('apply-form');
+    const btn = document.getElementById('submit-btn');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+      status.className = 'status';
+      status.textContent = '';
+
+      const data = {};
+      const formData = new FormData(form);
+      for (const [key, value] of formData.entries()) {
+        if (data[key]) {
+          data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
+        } else {
+          data[key] = value;
+        }
+      }
+      data.submitted_at = new Date().toISOString();
+
+      try {
+        await fetch(ENDPOINT, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(data),
+        });
+        window.location.href = 'gracias.html';
+      } catch (err) {
+        status.className = 'status error';
+        status.textContent = 'Algo falló. Escríbeme directo a carlos@fibalabs.com y lo resolvemos.';
+        btn.disabled = false;
+        btn.textContent = 'Enviar aplicación';
+      }
+    });
+  </script>
+</body>
+</html>
