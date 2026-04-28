@@ -325,3 +325,99 @@ button.submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
   letter-spacing: 0.12em;
 }
 .thanks a:hover { text-decoration: underline; }
+
+/* ============ AUDIO ATTACHMENTS ============ */
+
+.audio-or {
+  font-family: "Fira Code", monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 12px 0 4px;
+}
+.audio-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.audio-btn:hover { border-color: var(--accent); color: var(--accent); }
+.audio-btn.recording {
+  background: rgba(255, 80, 80, 0.1);
+  border-color: #ff5050;
+  color: #ff7a85;
+}
+.audio-btn .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #ff5050;
+  animation: blink 1s ease-in-out infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.audio-btn input[type="file"] { display: none; }
+.audio-attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+.audio-attachment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  color: var(--accent);
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.audio-attachment .audio-index { font-weight: 600; min-width: 60px; }
+.audio-attachment audio { height: 32px; max-width: 240px; }
+.audio-attachment .audio-meta { color: var(--muted); }
+.audio-attachment .audio-delete {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13px;
+  margin-left: auto;
+}
+.audio-attachment .audio-delete:hover { background: rgba(255, 80, 80, 0.1); color: #ff7a85; }
+.audio-attachment.uploading { opacity: 0.6; }
+.audio-attachment .upload-progress {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* TEST MODE banner (?test=1) */
+.test-banner {
+  background: rgba(255, 200, 0, 0.08);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  color: #ffd966;
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin-bottom: 32px;
+  font-family: "Fira Code", monospace;
+  font-size: 13px;
+}
