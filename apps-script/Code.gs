@@ -29,25 +29,61 @@ const NOTIFY_EMAIL = 'carlos@fibalabs.com';
 // ---------- ROUTING ----------
 
 function doPost(e) {
-  Logger.log('doPost ENTRY · contentLength=' + (e.postData ? e.postData.contents.length : 'no-postData'));
+  dlog('doPost ENTRY · contentLength=' + (e.postData ? e.postData.contents.length : 'no-postData'));
   try {
     const payload = JSON.parse(e.postData.contents);
     const action = payload.action || 'submit-form';
-    Logger.log('doPost ROUTING · action=' + action + ' · cohort=' + payload.cohort + ' · submission_id=' + payload.submission_id);
+    dlog('doPost ROUTING · action=' + action + ' · cohort=' + payload.cohort + ' · submission_id=' + payload.submission_id);
 
     if (action === 'upload-audio') return handleUploadAudio(payload);
     if (action === 'submit-form')  return handleSubmitForm(payload);
 
-    Logger.log('doPost UNKNOWN_ACTION · ' + action);
+    dlog('doPost UNKNOWN_ACTION · ' + action);
     return jsonResponse({ status: 'error', message: 'Unknown action: ' + action });
   } catch (err) {
-    Logger.log('doPost ERROR · ' + err + ' · stack=' + (err.stack || 'n/a'));
+    dlog('doPost ERROR · ' + err + ' · stack=' + (err.stack || 'n/a'));
     return jsonResponse({ status: 'error', message: String(err) });
   }
 }
 
-function doGet() {
+function doGet(e) {
+  // Debug endpoint: ?debug=logs returns the last 50 log lines we cached.
+  // ?debug=clear wipes the cache.
+  const params = (e && e.parameter) || {};
+  if (params.debug === 'logs') {
+    const props = PropertiesService.getScriptProperties();
+    const raw = props.getProperty('DEBUG_LOG') || '[]';
+    let logs;
+    try { logs = JSON.parse(raw); } catch (e) { logs = []; }
+    return ContentService
+      .createTextOutput(logs.join('\n') || '(empty)')
+      .setMimeType(ContentService.MimeType.TEXT);
+  }
+  if (params.debug === 'clear') {
+    PropertiesService.getScriptProperties().deleteProperty('DEBUG_LOG');
+    return jsonResponse({ status: 'ok', cleared: true });
+  }
   return jsonResponse({ status: 'ok', service: 'talleres-fiba intake (v2 with audio)' });
+}
+
+/**
+ * Persistent log: appends to ScriptProperties so we can read it via ?debug=logs.
+ * Logger.log only goes to the in-editor view which is unreliable for some accounts.
+ */
+function dlog(msg) {
+  Logger.log(msg);
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const raw = props.getProperty('DEBUG_LOG') || '[]';
+    let logs;
+    try { logs = JSON.parse(raw); } catch (e) { logs = []; }
+    const stamp = new Date().toISOString();
+    logs.push(`[${stamp}] ${msg}`);
+    if (logs.length > 50) logs.splice(0, logs.length - 50);
+    props.setProperty('DEBUG_LOG', JSON.stringify(logs));
+  } catch (err) {
+    Logger.log('dlog failed: ' + err);
+  }
 }
 
 // ---------- HANDLERS ----------
@@ -72,7 +108,7 @@ function handleUploadAudio(payload) {
   try {
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   } catch (e) {
-    Logger.log('setSharing failed: ' + e);
+    dlog('setSharing failed: ' + e);
   }
 
   return jsonResponse({
@@ -89,16 +125,16 @@ function handleUploadAudio(payload) {
  * up files we just saved in the submission folder.
  */
 function handleSubmitForm(payload) {
-  Logger.log('handleSubmitForm START');
+  dlog('handleSubmitForm START');
   const cohort = payload.cohort || 'unknown';
   const submissionId = payload.submission_id || '';
-  Logger.log('handleSubmitForm OPENING_SHEET · ' + SPREADSHEET_ID);
+  dlog('handleSubmitForm OPENING_SHEET · ' + SPREADSHEET_ID);
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-  Logger.log('handleSubmitForm SHEET_OPEN · name=' + ss.getName());
+  dlog('handleSubmitForm SHEET_OPEN · name=' + ss.getName());
 
   let sheet = ss.getSheetByName(cohort);
   const isNewSheet = !sheet;
-  Logger.log('handleSubmitForm TAB_LOOKUP · cohort=' + cohort + ' · existed=' + !isNewSheet);
+  dlog('handleSubmitForm TAB_LOOKUP · cohort=' + cohort + ' · existed=' + !isNewSheet);
   if (isNewSheet) sheet = ss.insertSheet(cohort);
 
   const knownOrder = [
@@ -164,9 +200,9 @@ function handleSubmitForm(payload) {
     if (Array.isArray(val)) return val.join(', ');
     return String(val);
   });
-  Logger.log('handleSubmitForm APPENDING_ROW · cells=' + row.length + ' · firstFew=' + JSON.stringify(row.slice(0, 5)));
+  dlog('handleSubmitForm APPENDING_ROW · cells=' + row.length + ' · firstFew=' + JSON.stringify(row.slice(0, 5)));
   sheet.appendRow(row);
-  Logger.log('handleSubmitForm ROW_APPENDED · lastRow now=' + sheet.getLastRow());
+  dlog('handleSubmitForm ROW_APPENDED · lastRow now=' + sheet.getLastRow());
 
   // Email notification
   try {
@@ -186,7 +222,7 @@ function handleSubmitForm(payload) {
     ].filter(Boolean).join('\n');
     MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
   } catch (mailErr) {
-    Logger.log('Mail failed: ' + mailErr);
+    dlog('Mail failed: ' + mailErr);
   }
 
   return jsonResponse({ status: 'ok' });
