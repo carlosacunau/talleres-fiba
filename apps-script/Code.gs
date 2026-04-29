@@ -29,16 +29,19 @@ const NOTIFY_EMAIL = 'carlos@fibalabs.com';
 // ---------- ROUTING ----------
 
 function doPost(e) {
+  Logger.log('doPost ENTRY · contentLength=' + (e.postData ? e.postData.contents.length : 'no-postData'));
   try {
     const payload = JSON.parse(e.postData.contents);
-    const action = payload.action || 'submit-form'; // back-compat with old endpoint
+    const action = payload.action || 'submit-form';
+    Logger.log('doPost ROUTING · action=' + action + ' · cohort=' + payload.cohort + ' · submission_id=' + payload.submission_id);
 
     if (action === 'upload-audio') return handleUploadAudio(payload);
     if (action === 'submit-form')  return handleSubmitForm(payload);
 
+    Logger.log('doPost UNKNOWN_ACTION · ' + action);
     return jsonResponse({ status: 'error', message: 'Unknown action: ' + action });
   } catch (err) {
-    Logger.log(err);
+    Logger.log('doPost ERROR · ' + err + ' · stack=' + (err.stack || 'n/a'));
     return jsonResponse({ status: 'error', message: String(err) });
   }
 }
@@ -86,12 +89,16 @@ function handleUploadAudio(payload) {
  * up files we just saved in the submission folder.
  */
 function handleSubmitForm(payload) {
+  Logger.log('handleSubmitForm START');
   const cohort = payload.cohort || 'unknown';
   const submissionId = payload.submission_id || '';
+  Logger.log('handleSubmitForm OPENING_SHEET · ' + SPREADSHEET_ID);
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  Logger.log('handleSubmitForm SHEET_OPEN · name=' + ss.getName());
 
   let sheet = ss.getSheetByName(cohort);
   const isNewSheet = !sheet;
+  Logger.log('handleSubmitForm TAB_LOOKUP · cohort=' + cohort + ' · existed=' + !isNewSheet);
   if (isNewSheet) sheet = ss.insertSheet(cohort);
 
   const knownOrder = [
@@ -157,7 +164,9 @@ function handleSubmitForm(payload) {
     if (Array.isArray(val)) return val.join(', ');
     return String(val);
   });
+  Logger.log('handleSubmitForm APPENDING_ROW · cells=' + row.length + ' · firstFew=' + JSON.stringify(row.slice(0, 5)));
   sheet.appendRow(row);
+  Logger.log('handleSubmitForm ROW_APPENDED · lastRow now=' + sheet.getLastRow());
 
   // Email notification
   try {

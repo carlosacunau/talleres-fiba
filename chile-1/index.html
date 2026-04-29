@@ -721,12 +721,15 @@
         });
         data.submission_id = submissionId;
 
-        await fetch(ENDPOINT, {
+        const submitPayload = JSON.stringify({ action: 'submit-form', ...data });
+        console.log('[talleres] submit-form POST starting, payload size:', submitPayload.length, 'bytes');
+        const submitResp = await fetch(ENDPOINT, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'submit-form', ...data }),
+          body: submitPayload,
         });
+        console.log('[talleres] submit-form POST returned (no-cors, opaque)', submitResp);
 
         clearDraft();
         window.location.href = 'gracias.html';
