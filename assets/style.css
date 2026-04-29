@@ -169,12 +169,7 @@ h3 {
 }
 .form-meta span { padding: 6px 12px; background: var(--surface); border-radius: 6px; }
 
-.section {
-  margin-bottom: 56px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-}
-.section:first-of-type { border-top: none; padding-top: 0; }
+.section { /* now a logical wrapper only — visual rhythm comes from .question-page */ }
 .section-eyebrow {
   font-family: "Fira Code", monospace;
   font-size: 11px;
@@ -183,13 +178,103 @@ h3 {
   color: var(--accent);
   margin-bottom: 8px;
 }
-.section h2 {
+.section > h2 {
   font-family: "Instrument Serif", serif;
   font-style: italic;
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 32px;
   letter-spacing: -0.01em;
+}
+
+/* Typeform-style per-question pages: each .field inside a section is its own viewport-height page. */
+.section > .field {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  margin-bottom: 0;
+  border-top: 1px solid var(--border);
+}
+.section > .field:first-of-type { border-top: none; }
+
+/* Section heading shown above the first .field of each section (rendered inline in HTML). */
+.page-header {
+  margin-bottom: 32px;
+}
+.page-header .section-eyebrow { margin-bottom: 8px; }
+.page-header h2 {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 400;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* "Siguiente" CTA below each question. */
+.page-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  align-self: flex-start;
+}
+.page-cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Progress pill */
+.progress-pill {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(10, 10, 20, 0.9);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-family: "Fira Code", monospace;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  z-index: 90;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.progress-pill .progress-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Apply scroll-snap to the form container only (not whole page — submit row + footer should scroll free). */
+form#apply-form {
+  scroll-snap-type: y proximity;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .section > .field { min-height: 85vh; padding: 32px 0; }
+  .page-header h2 { font-size: 26px; }
+  .progress-pill { bottom: 12px; right: 12px; font-size: 10px; }
 }
 
 .field { margin-bottom: 32px; }

@@ -29,27 +29,30 @@
 
       <!-- DATOS DE CONTACTO -->
       <section class="section">
-        <p class="section-eyebrow">Para empezar</p>
-        <h2>Tus datos</h2>
-
         <div class="field">
-          <label for="contact_name">Tu nombre <span class="required">*</span></label>
-          <input id="contact_name" type="text" name="contact_name" required>
-        </div>
-
-        <div class="field">
-          <label for="contact_email">Tu correo <span class="required">*</span></label>
-          <span class="hint">A este correo te enviaré toda la información relacionada al workshop.</span>
-          <input id="contact_email" type="email" name="contact_email" required>
+          <div class="page-header">
+            <p class="section-eyebrow">Para empezar</p>
+            <h2>Tus datos</h2>
+          </div>
+          <div class="subfield-block">
+            <label for="contact_name">Tu nombre <span class="required">*</span></label>
+            <input id="contact_name" type="text" name="contact_name" required>
+          </div>
+          <div class="subfield-block">
+            <label for="contact_email">Tu correo <span class="required">*</span></label>
+            <span class="hint">A este correo te enviaré toda la información relacionada al workshop.</span>
+            <input id="contact_email" type="email" name="contact_email" required>
+          </div>
         </div>
       </section>
 
       <!-- SECCIÓN 1 -->
       <section class="section">
-        <p class="section-eyebrow">Sección 1 de 5</p>
-        <h2>Tu negocio</h2>
-
         <div class="field">
+          <div class="page-header">
+            <p class="section-eyebrow">Sección 1 de 5</p>
+            <h2>Tu negocio</h2>
+          </div>
           <label>1. Sobre tu empresa</label>
           <span class="hint">Cuéntame en una frase qué hace tu empresa, como se la describirías a alguien que no es del rubro. Sitio web es opcional si no tienes uno.</span>
           <div class="field-grid">
@@ -81,10 +84,11 @@
 
       <!-- SECCIÓN 2 -->
       <section class="section">
-        <p class="section-eyebrow">Sección 2 de 5</p>
-        <h2>Dónde vive la información</h2>
-
         <div class="field">
+          <div class="page-header">
+            <p class="section-eyebrow">Sección 2 de 5</p>
+            <h2>Dónde vive la información</h2>
+          </div>
           <label for="q5">4. ¿Qué herramientas usas a diario para operar el negocio? <span class="required">*</span></label>
           <span class="hint">Vamos por categorías: correo, CRM o ventas, contabilidad, gestión de proyectos, almacenamiento, mensajería interna, banco. Si te acuerdas del nombre exacto, mejor.</span>
           <textarea id="q5" name="q5_herramientas" class="tall" placeholder="Correo: Gmail&#10;CRM: HubSpot&#10;Contabilidad: Defontana&#10;..." required></textarea>
@@ -140,11 +144,12 @@
 
       <!-- SECCIÓN 3 -->
       <section class="section">
-        <p class="section-eyebrow">Sección 3 de 5</p>
-        <h2>Qué necesitas del taller</h2>
-        <p class="hint" style="margin-bottom: 32px;">Estas respuestas me ayudarán a personalizar mejor el taller.</p>
-
         <div class="field">
+          <div class="page-header">
+            <p class="section-eyebrow">Sección 3 de 5</p>
+            <h2>Qué necesitas del taller</h2>
+            <p class="hint">Estas respuestas me ayudarán a personalizar mejor el taller.</p>
+          </div>
           <label for="q9">9. Describe UNA tarea que haces cada semana donde una IA bien configurada te haría la vida más fácil. <span class="required">*</span></label>
           <span class="hint">Llévame por la última vez que hiciste esto. Si tuvieras que enseñarle a alguien nuevo, ¿qué le dirías? Incluye en tu respuesta:</span>
           <ul class="prompt-list">
@@ -202,10 +207,11 @@
 
       <!-- SECCIÓN 4 -->
       <section class="section">
-        <p class="section-eyebrow">Sección 4 de 5</p>
-        <h2>Visibilidad</h2>
-
         <div class="field">
+          <div class="page-header">
+            <p class="section-eyebrow">Sección 4 de 5</p>
+            <h2>Visibilidad</h2>
+          </div>
           <label for="q13">13. Si pudieras tener UN dashboard que te muestre el estado del negocio en 30 segundos, ¿qué tres cosas necesitas ver? <span class="required">*</span></label>
           <span class="hint">Piensa en lo primero que mirarías el lunes por la mañana al sentarte. ¿Caja? ¿Pipeline? ¿Proyectos en curso? ¿Clientes en riesgo?</span>
           <textarea id="q13" name="q13_dashboard" placeholder="1.&#10;2.&#10;3." required></textarea>
@@ -220,10 +226,11 @@
 
       <!-- SECCIÓN 5 -->
       <section class="section">
-        <p class="section-eyebrow">Sección 5 de 5</p>
-        <h2>Conceptos y cierre</h2>
-
         <div class="field">
+          <div class="page-header">
+            <p class="section-eyebrow">Sección 5 de 5</p>
+            <h2>Conceptos y cierre</h2>
+          </div>
           <label>14. ¿Cuáles de estos conceptos ya conoces o has usado? <span class="required">*</span></label>
           <span class="hint">Marca todos los que apliquen. Esto no es para medir tus conocimientos, solo me ayuda a garantizar que cubriremos los conceptos necesarios para un entendimiento común.</span>
           <div class="options">
@@ -258,25 +265,15 @@
 
       <div class="submit-row">
         <button type="submit" class="submit" id="submit-btn">Enviar aplicación</button>
-        <button type="button" class="submit-secondary" id="save-later-btn">Guardar y volver después</button>
         <p class="status" id="status"></p>
       </div>
     </form>
 
-    <div class="modal-backdrop" id="save-later-modal" style="display:none;">
-      <div class="modal">
-        <h3>Tu progreso está guardado</h3>
-        <p>Las respuestas de texto quedan guardadas en este navegador. Los audios que ya grabaste también están seguros, ya se subieron al taller.</p>
-        <p>Cuando vuelvas a esta página desde el mismo navegador, vas a encontrar todo como lo dejaste y podrás continuar.</p>
-        <div class="modal-actions">
-          <button type="button" class="btn-secondary" id="modal-close">Cerrar y volver después</button>
-          <button type="button" class="btn-primary" id="modal-submit">Enviar igual ahora</button>
-        </div>
-      </div>
-    </div>
-
     <div class="draft-pill" id="draft-pill" style="display:none;">
       <span class="dot"></span><span id="draft-pill-text">Borrador guardado</span>
+    </div>
+    <div class="progress-pill" id="progress-pill" style="display:none;">
+      <span class="progress-dot"></span><span id="progress-pill-text">Página 1 de 16</span>
     </div>
   </main>
 
@@ -443,24 +440,6 @@
     };
     document.getElementById('apply-form').addEventListener('input', scheduleSave);
     document.getElementById('apply-form').addEventListener('change', scheduleSave);
-
-    // ---------- SAVE-FOR-LATER MODAL ----------
-    const modal = document.getElementById('save-later-modal');
-    document.getElementById('save-later-btn').addEventListener('click', () => {
-      saveDraft();
-      modal.style.display = 'flex';
-    });
-    document.getElementById('modal-close').addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-    document.getElementById('modal-submit').addEventListener('click', () => {
-      modal.style.display = 'none';
-      document.getElementById('apply-form').requestSubmit();
-    });
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.style.display = 'none';
-    });
-
 
     // ---------- AUDIO STATE ----------
     /** Map<questionId, Array<{ id, blob, source, durationSec, mime }>> */
@@ -823,6 +802,83 @@
         submitBtn.textContent = 'Enviar aplicación';
       }
     });
+
+    // ---------- TYPEFORM-STYLE NAVIGATION ----------
+    /**
+     * Each .field that's a direct child of a .section is a "page".
+     * - Inject a "Siguiente ↓" button at the bottom of every page except the last.
+     * - Track which page is in view via IntersectionObserver, update progress pill.
+     * - On load, scroll to the first unanswered page (no text and no audios).
+     */
+    const pages = Array.from(document.querySelectorAll('.section > .field'));
+    const totalPages = pages.length;
+    const progressPill = document.getElementById('progress-pill');
+    const progressPillText = document.getElementById('progress-pill-text');
+
+    if (progressPill) progressPill.style.display = 'flex';
+
+    pages.forEach((page, i) => {
+      page.dataset.pageIndex = i;
+      if (i < totalPages - 1) {
+        const cta = document.createElement('button');
+        cta.type = 'button';
+        cta.className = 'page-cta';
+        cta.innerHTML = 'Siguiente <span aria-hidden="true">↓</span>';
+        cta.addEventListener('click', () => {
+          const next = pages[i + 1];
+          if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        page.appendChild(cta);
+      }
+    });
+
+    // Update progress pill on scroll using IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      // Pick the entry whose intersectionRatio is highest (most visible)
+      let best = null;
+      entries.forEach(e => {
+        if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
+          best = e;
+        }
+      });
+      if (best && progressPillText) {
+        const idx = parseInt(best.target.dataset.pageIndex, 10) + 1;
+        progressPillText.textContent = `Página ${idx} de ${totalPages}`;
+      }
+    }, { threshold: [0.4, 0.6, 0.8] });
+    pages.forEach(p => observer.observe(p));
+
+    // ---------- RESTORE TO FIRST UNANSWERED ----------
+    /**
+     * After draft restore (text + audio), scroll to the first page where the user hasn't answered.
+     * "Answered" = has any text in its inputs/textareas OR has any audio attached for that question.
+     */
+    const isPageAnswered = (page) => {
+      const inputs = page.querySelectorAll('input[type="text"], input[type="email"], input[type="number"], textarea');
+      for (const el of inputs) {
+        if ((el.value || '').trim().length > 0) return true;
+      }
+      const checked = page.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked');
+      if (checked.length > 0) return true;
+      const audioControls = page.querySelectorAll('.audio-controls');
+      for (const ac of audioControls) {
+        const qid = ac.dataset.audioQuestion;
+        const entries = audioStore.get(qid) || [];
+        if (entries.length > 0) return true;
+      }
+      return false;
+    };
+
+    // Run restore-scroll after a short delay so audio restore + text restore have settled
+    setTimeout(() => {
+      // Only auto-scroll if there's actually some prior progress (skip on completely fresh forms)
+      const anyAnswered = pages.some(p => isPageAnswered(p));
+      if (!anyAnswered) return;
+      const firstUnanswered = pages.find(p => !isPageAnswered(p));
+      if (firstUnanswered) {
+        firstUnanswered.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 400);
   </script>
 </body>
 </html>
