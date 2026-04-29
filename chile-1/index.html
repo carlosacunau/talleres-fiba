@@ -656,46 +656,62 @@
       const submissionId = (data.contact_email || 'anon').replace(/[^a-z0-9]/gi, '_').toLowerCase()
         + '_' + Date.now();
 
-      const totalAudios = Array.from(audioStore.values()).reduce((acc, arr) => acc + arr.length, 0);
-      let uploadedCount = 0;
+      // Build flat list of upload jobs across all questions
+      const uploadJobs = [];
+      audioStore.forEach((entries, qid) => {
+        entries.forEach((entry, i) => {
+          uploadJobs.push({ qid, index: i + 1, entry });
+        });
+      });
+      const totalAudios = uploadJobs.length;
+      let completedCount = 0;
+
+      const updateProgress = () => {
+        if (totalAudios === 0) return;
+        submitBtn.textContent = `Subiendo audios ${completedCount}/${totalAudios}…`;
+      };
+      updateProgress();
 
       const audioUrlsByQ = {};
+      audioStore.forEach((_, qid) => { audioUrlsByQ[qid] = []; });
 
       try {
-        for (const [qid, entries] of audioStore.entries()) {
-          audioUrlsByQ[qid] = [];
-          for (let i = 0; i < entries.length; i++) {
-            const entry = entries[i];
-            uploadedCount++;
-            const sizeMB = (entry.blob.size / (1024*1024)).toFixed(1);
-            submitBtn.textContent = `Subiendo audio ${uploadedCount}/${totalAudios} (${sizeMB} MB)…`;
+        // Run all uploads in parallel
+        await Promise.all(uploadJobs.map(async job => {
+          const { qid, index, entry } = job;
+          const base64 = await blobToBase64(entry.blob);
+          const ext = guessExt(entry.mime);
+          const filename = `${submissionId}__${qid}__${index}.${ext}`;
 
-            const base64 = await blobToBase64(entry.blob);
-            const ext = guessExt(entry.mime);
-            const filename = `${submissionId}__${qid}__${i+1}.${ext}`;
+          await fetch(ENDPOINT, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'upload-audio',
+              cohort: 'chile-1',
+              submission_id: submissionId,
+              question_id: qid,
+              index,
+              filename,
+              mime: entry.mime,
+              duration_sec: entry.durationSec,
+              size_bytes: entry.blob.size,
+              source: entry.source,
+              data_base64: base64,
+            }),
+          });
 
-            const uploadResp = await fetch(ENDPOINT, {
-              method: 'POST',
-              mode: 'no-cors',
-              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify({
-                action: 'upload-audio',
-                cohort: 'chile-1',
-                submission_id: submissionId,
-                question_id: qid,
-                index: i + 1,
-                filename,
-                mime: entry.mime,
-                duration_sec: entry.durationSec,
-                size_bytes: entry.blob.size,
-                source: entry.source,
-                data_base64: base64,
-              }),
-            });
-            // no-cors means we can't read response; we trust completion
-            audioUrlsByQ[qid].push(filename); // placeholder — Apps Script will reconcile by filename
-          }
-        }
+          audioUrlsByQ[qid].push({ index, filename });
+          completedCount++;
+          updateProgress();
+        }));
+
+        // Sort each question's filenames back into original order
+        Object.keys(audioUrlsByQ).forEach(qid => {
+          audioUrlsByQ[qid].sort((a, b) => a.index - b.index);
+          audioUrlsByQ[qid] = audioUrlsByQ[qid].map(o => o.filename);
+        });
 
         submitBtn.textContent = 'Enviando formulario…';
 

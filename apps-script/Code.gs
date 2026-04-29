@@ -111,8 +111,20 @@ function handleSubmitForm(payload) {
     'q11_proceso_audio', 'q12_reportes_audio', 'q13_dashboard_audio', 'q15_extra_audio',
   ];
 
-  if (isNewSheet || sheet.getLastRow() === 0) {
-    sheet.appendRow(knownOrder);
+  // Ensure header row matches the current schema. Replace it if missing or stale.
+  const lastCol = sheet.getLastColumn();
+  let needsHeader = isNewSheet || sheet.getLastRow() === 0;
+  if (!needsHeader) {
+    const currentHeader = sheet.getRange(1, 1, 1, Math.max(lastCol, 1)).getValues()[0];
+    const matches = knownOrder.every((k, i) => currentHeader[i] === k);
+    if (!matches) {
+      // Insert a fresh header row above existing data
+      sheet.insertRowBefore(1);
+      needsHeader = true;
+    }
+  }
+  if (needsHeader) {
+    sheet.getRange(1, 1, 1, knownOrder.length).setValues([knownOrder]);
     sheet.getRange(1, 1, 1, knownOrder.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
   }
