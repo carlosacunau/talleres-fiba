@@ -326,6 +326,28 @@ button.submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 }
 .thanks a:hover { text-decoration: underline; }
 
+.prompt-list {
+  list-style: none;
+  padding: 16px 20px;
+  margin: 0 0 16px;
+  background: rgba(139, 92, 246, 0.05);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+}
+.prompt-list li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 18px;
+  position: relative;
+}
+.prompt-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+}
+
 /* ============ AUDIO ATTACHMENTS ============ */
 
 .audio-or {

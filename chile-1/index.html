@@ -145,103 +145,47 @@
         <p class="hint" style="margin-bottom: 32px;">Estas respuestas determinan qué skills voy a construir antes del taller para tu negocio. Mientras más concreto, mejor.</p>
 
         <div class="field">
-          <label for="q9">9. Describe en detalle UNA tarea que haces cada semana donde una IA bien configurada te haría la vida más fácil. <span class="required">*</span></label>
-          <span class="hint">Llévame por la última vez que hiciste esto. Si tuvieras que enseñarle a alguien nuevo, ¿qué le dirías?</span>
-          <div class="subfields">
-            <div class="field">
-              <label for="q9a">¿Qué disparador la inicia? (un día, un evento, un correo)</label>
-              <input id="q9a" type="text" name="q9_trigger" required>
-            </div>
-            <div class="field">
-              <label for="q9b">¿De dónde sacas la información de entrada?</label>
-              <input id="q9b" type="text" name="q9_inputs" required>
-            </div>
-            <div class="field">
-              <label for="q9c">¿Cuál es el proceso paso a paso?</label>
-              <textarea id="q9c" name="q9_proceso" required></textarea>
-              <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
-              <div class="audio-controls" data-audio-question="q9_proceso">
-                <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
-                <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
-              </div>
-              <div class="audio-attachments"></div>
-            </div>
-            <div class="field">
-              <label for="q9d">¿Cuál es el resultado final? (correo, documento, planilla, mensaje)</label>
-              <input id="q9d" type="text" name="q9_output" required>
-            </div>
-            <div class="field">
-              <label for="q9e">¿Cuánto tiempo te toma cada vez? ¿Cada cuánto la haces?</label>
-              <input id="q9e" type="text" name="q9_tiempo" placeholder="Ej: 2 horas, todos los lunes" required>
-            </div>
+          <label for="q9">9. Describe UNA tarea que haces cada semana donde una IA bien configurada te haría la vida más fácil. <span class="required">*</span></label>
+          <span class="hint">Llévame por la última vez que hiciste esto. Si tuvieras que enseñarle a alguien nuevo, ¿qué le dirías? Incluye en tu respuesta:</span>
+          <ul class="prompt-list">
+            <li>Qué dispara la tarea (un día, un evento, un correo)</li>
+            <li>De dónde sacas la información de entrada</li>
+            <li>El proceso paso a paso</li>
+            <li>Cuál es el resultado final (correo, documento, planilla, mensaje)</li>
+            <li>Cuánto tiempo te toma cada vez y cada cuánto la haces</li>
+          </ul>
+          <textarea id="q9" name="q9_tarea" class="tall" required></textarea>
+          <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
+          <div class="audio-controls" data-audio-question="q9_tarea">
+            <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
+            <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
           </div>
+          <div class="audio-attachments"></div>
           <span class="why">Con esto te construyo un skeleton de skill ANTES del taller, listo para conectarlo con tu data real en el Módulo 2.</span>
         </div>
 
         <div class="field">
           <label for="q10">10. Describe UNA segunda tarea donde necesitas ayuda. <span class="required">*</span></label>
-          <span class="hint">Si la primera fue la que más te pesa, esta puede ser la segunda más pesada o la que crees que sería más fácil de mejorar.</span>
-          <div class="subfields">
-            <div class="field">
-              <label for="q10a">¿Qué disparador la inicia?</label>
-              <input id="q10a" type="text" name="q10_trigger" required>
-            </div>
-            <div class="field">
-              <label for="q10b">¿De dónde sacas la información de entrada?</label>
-              <input id="q10b" type="text" name="q10_inputs" required>
-            </div>
-            <div class="field">
-              <label for="q10c">¿Cuál es el proceso paso a paso?</label>
-              <textarea id="q10c" name="q10_proceso" required></textarea>
-              <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
-              <div class="audio-controls" data-audio-question="q10_proceso">
-                <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
-                <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
-              </div>
-              <div class="audio-attachments"></div>
-            </div>
-            <div class="field">
-              <label for="q10d">¿Cuál es el resultado final? (correo, documento, planilla, mensaje)</label>
-              <input id="q10d" type="text" name="q10_output" required>
-            </div>
-            <div class="field">
-              <label for="q10e">¿Cuánto tiempo te toma? ¿Cada cuánto la haces?</label>
-              <input id="q10e" type="text" name="q10_tiempo" required>
-            </div>
+          <span class="hint">Si la primera fue la que más te pesa, esta puede ser la segunda más pesada o la que crees que sería más fácil de mejorar. Incluye los mismos puntos que en la tarea anterior (disparador, información de entrada, proceso, resultado, tiempo).</span>
+          <textarea id="q10" name="q10_tarea" class="tall" required></textarea>
+          <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
+          <div class="audio-controls" data-audio-question="q10_tarea">
+            <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
+            <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
           </div>
+          <div class="audio-attachments"></div>
         </div>
 
         <div class="field">
           <label for="q11">11. ¿Hay una TERCERA tarea que valga la pena mencionar? (opcional)</label>
-          <span class="hint">No te preocupes si no se te ocurre una tercera, dos buenas son suficientes.</span>
-          <div class="subfields">
-            <div class="field">
-              <label for="q11a">¿Qué disparador la inicia?</label>
-              <input id="q11a" type="text" name="q11_trigger">
-            </div>
-            <div class="field">
-              <label for="q11b">¿De dónde sacas la información de entrada?</label>
-              <input id="q11b" type="text" name="q11_inputs">
-            </div>
-            <div class="field">
-              <label for="q11c">¿Cuál es el proceso paso a paso?</label>
-              <textarea id="q11c" name="q11_proceso"></textarea>
-              <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
-              <div class="audio-controls" data-audio-question="q11_proceso">
-                <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
-                <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
-              </div>
-              <div class="audio-attachments"></div>
-            </div>
-            <div class="field">
-              <label for="q11d">¿Cuál es el resultado final? (correo, documento, planilla, mensaje)</label>
-              <input id="q11d" type="text" name="q11_output">
-            </div>
-            <div class="field">
-              <label for="q11e">¿Cuánto tiempo te toma? ¿Cada cuánto la haces?</label>
-              <input id="q11e" type="text" name="q11_tiempo">
-            </div>
+          <span class="hint">No te preocupes si no se te ocurre una tercera, dos buenas son suficientes. Si la incluyes, usa los mismos puntos (disparador, información de entrada, proceso, resultado, tiempo).</span>
+          <textarea id="q11" name="q11_tarea" class="tall"></textarea>
+          <p class="audio-or">— o responde por audio · máx 3 min recomendado —</p>
+          <div class="audio-controls" data-audio-question="q11_tarea">
+            <button type="button" class="audio-btn record-btn"><span class="icon">🎙</span><span class="label">Grabar</span></button>
+            <label class="audio-btn upload-btn"><span class="icon">📎</span><span class="label">Subir archivo</span><input type="file" accept="audio/*" class="upload-input"></label>
           </div>
+          <div class="audio-attachments"></div>
         </div>
 
         <div class="field">

@@ -169,15 +169,13 @@ function handleSubmitForm(payload) {
     'q1_empresa', 'q1_web', 'q1_industria',
     'q2_equipo', 'q3_cliente_modelo',
     'q5_herramientas', 'q5b_fuentes_datos', 'q6_info_critica', 'q7_correo', 'q8_computador',
-    'q9_trigger', 'q9_inputs', 'q9_proceso', 'q9_output', 'q9_tiempo',
-    'q10_trigger', 'q10_inputs', 'q10_proceso', 'q10_output', 'q10_tiempo',
-    'q11_trigger', 'q11_inputs', 'q11_proceso', 'q11_output', 'q11_tiempo',
+    'q9_tarea', 'q10_tarea', 'q11_tarea',
     'q12_reportes', 'q13_dashboard',
     'q14_conceptos', 'q14_dudas', 'q15_extra',
     // Audio Drive URL columns (parallel to long-form questions)
     'q3_cliente_modelo_audio', 'q5_herramientas_audio', 'q5b_fuentes_datos_audio',
-    'q6_info_critica_audio', 'q9_proceso_audio', 'q10_proceso_audio',
-    'q11_proceso_audio', 'q12_reportes_audio', 'q13_dashboard_audio', 'q15_extra_audio',
+    'q6_info_critica_audio', 'q9_tarea_audio', 'q10_tarea_audio',
+    'q11_tarea_audio', 'q12_reportes_audio', 'q13_dashboard_audio', 'q15_extra_audio',
   ];
 
   // Ensure header row matches the current schema. Replace it if missing or stale.
