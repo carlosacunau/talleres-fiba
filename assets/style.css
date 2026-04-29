@@ -189,7 +189,7 @@ h3 {
 
 /* Typeform-style per-question pages: each .field inside a section is its own viewport-height page. */
 .section > .field {
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -265,8 +265,9 @@ h3 {
   background: var(--accent);
 }
 
-/* Apply scroll-snap to the form container only (not whole page — submit row + footer should scroll free). */
-form#apply-form {
+/* Apply scroll-snap on the document scroll container (the html element actually scrolls).
+   Use proximity (not mandatory) so users aren't trapped if they scroll mid-question. */
+html {
   scroll-snap-type: y proximity;
 }
 
