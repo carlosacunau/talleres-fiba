@@ -126,7 +126,10 @@ function handleUploadAudio(payload) {
  */
 function handleSubmitForm(payload) {
   dlog('handleSubmitForm START');
-  const cohort = payload.cohort || 'unknown';
+  // Coerce cohort to a single string (defensive: if duplicated in payload it can come as "chile-1,chile-1")
+  let cohort = payload.cohort || 'unknown';
+  if (Array.isArray(cohort)) cohort = cohort[0];
+  if (typeof cohort === 'string' && cohort.indexOf(',') !== -1) cohort = cohort.split(',')[0];
   const submissionId = payload.submission_id || '';
   dlog('handleSubmitForm OPENING_SHEET · ' + SPREADSHEET_ID);
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);

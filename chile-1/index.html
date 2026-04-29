@@ -640,8 +640,8 @@
       submitBtn.disabled = true;
       setStatus('');
 
-      // Build base payload from form fields
-      const data = { cohort: 'chile-1' };
+      // Build base payload from form fields (cohort comes from the hidden input)
+      const data = {};
       const fd = new FormData(form);
       for (const [k, v] of fd.entries()) {
         if (data[k] !== undefined) {
