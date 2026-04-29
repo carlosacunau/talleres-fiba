@@ -204,9 +204,17 @@ function getOrCreateChild_(parent, name) {
 }
 
 function getOrCreateSubmissionFolder_(cohort, submissionId) {
-  const root = getOrCreateRootFolder_();
-  const cohortFolder = getOrCreateChild_(root, cohort);
-  return getOrCreateChild_(cohortFolder, submissionId);
+  // LockService prevents the parallel-upload race that would otherwise create
+  // multiple folders with the same name (Drive doesn't enforce uniqueness).
+  const lock = LockService.getScriptLock();
+  lock.waitLock(20000); // up to 20s
+  try {
+    const root = getOrCreateRootFolder_();
+    const cohortFolder = getOrCreateChild_(root, cohort);
+    return getOrCreateChild_(cohortFolder, submissionId);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 // ---------- UTIL ----------
