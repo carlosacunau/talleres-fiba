@@ -27,6 +27,16 @@
     <form id="apply-form">
       <input type="hidden" name="cohort" value="chile-1">
 
+      <!-- INTRO -->
+      <section class="section">
+        <div class="field intro-page">
+          <p class="section-eyebrow">Cohorte 1 · Chile · v1</p>
+          <h1 class="intro-title">Cuéntame de tu negocio</h1>
+          <p class="intro-lead">Este formulario me ayuda a conocerte un poco más, a ti y a tu negocio, para personalizar el taller a lo que necesitas.</p>
+          <p class="intro-meta">15 preguntas · ~10 minutos · puedes responder por texto o por audio</p>
+        </div>
+      </section>
+
       <!-- DATOS DE CONTACTO -->
       <section class="section">
         <div class="field">
@@ -272,8 +282,9 @@
     <div class="draft-pill" id="draft-pill" style="display:none;">
       <span class="dot"></span><span id="draft-pill-text">Borrador guardado</span>
     </div>
-    <div class="progress-pill" id="progress-pill" style="display:none;">
-      <span class="progress-dot"></span><span id="progress-pill-text">Página 1 de 16</span>
+    <div class="progress-bar" id="progress-bar" style="display:none;">
+      <div class="progress-fill" id="progress-fill"></div>
+      <div class="progress-label" id="progress-label">1 / 17</div>
     </div>
   </main>
 
@@ -812,10 +823,11 @@
      */
     const pages = Array.from(document.querySelectorAll('.section > .field'));
     const totalPages = pages.length;
-    const progressPill = document.getElementById('progress-pill');
-    const progressPillText = document.getElementById('progress-pill-text');
+    const progressBar = document.getElementById('progress-bar');
+    const progressFill = document.getElementById('progress-fill');
+    const progressLabel = document.getElementById('progress-label');
 
-    if (progressPill) progressPill.style.display = 'flex';
+    if (progressBar) progressBar.style.display = 'block';
 
     pages.forEach((page, i) => {
       page.dataset.pageIndex = i;
@@ -823,7 +835,10 @@
         const cta = document.createElement('button');
         cta.type = 'button';
         cta.className = 'page-cta';
-        cta.innerHTML = 'Siguiente <span aria-hidden="true">↓</span>';
+        // First page = "Comenzar", rest = "Siguiente ↓"
+        cta.innerHTML = i === 0
+          ? 'Comenzar <span aria-hidden="true">→</span>'
+          : 'Siguiente <span aria-hidden="true">↓</span>';
         cta.addEventListener('click', () => {
           const next = pages[i + 1];
           if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -832,18 +847,19 @@
       }
     });
 
-    // Update progress pill on scroll using IntersectionObserver
+    // Update progress bar on scroll using IntersectionObserver
     const observer = new IntersectionObserver((entries) => {
-      // Pick the entry whose intersectionRatio is highest (most visible)
       let best = null;
       entries.forEach(e => {
         if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) {
           best = e;
         }
       });
-      if (best && progressPillText) {
+      if (best) {
         const idx = parseInt(best.target.dataset.pageIndex, 10) + 1;
-        progressPillText.textContent = `Página ${idx} de ${totalPages}`;
+        const pct = Math.round((idx / totalPages) * 100);
+        if (progressFill) progressFill.style.width = pct + '%';
+        if (progressLabel) progressLabel.textContent = `${idx} / ${totalPages}`;
       }
     }, { threshold: [0.4, 0.6, 0.8] });
     pages.forEach(p => observer.observe(p));
