@@ -37,6 +37,7 @@ function doPost(e) {
 
     if (action === 'upload-audio') return handleUploadAudio(payload);
     if (action === 'submit-form')  return handleSubmitForm(payload);
+    if (action === 'delete-audio') return handleDeleteAudio(payload);
 
     dlog('doPost UNKNOWN_ACTION · ' + action);
     return jsonResponse({ status: 'error', message: 'Unknown action: ' + action });
@@ -117,6 +118,28 @@ function handleUploadAudio(payload) {
     url: file.getUrl(),
     filename,
   });
+}
+
+/**
+ * Delete a previously uploaded audio file by filename within the submission folder.
+ */
+function handleDeleteAudio(payload) {
+  const cohort = payload.cohort || 'unknown';
+  const submissionId = payload.submission_id || '';
+  const filename = payload.filename || '';
+  if (!submissionId || !filename) {
+    return jsonResponse({ status: 'error', message: 'Missing submission_id or filename' });
+  }
+  const folder = getOrCreateSubmissionFolder_(cohort, submissionId);
+  const it = folder.getFilesByName(filename);
+  let deleted = 0;
+  while (it.hasNext()) {
+    const f = it.next();
+    f.setTrashed(true);
+    deleted++;
+  }
+  dlog('handleDeleteAudio · cohort=' + cohort + ' · sub=' + submissionId + ' · file=' + filename + ' · deleted=' + deleted);
+  return jsonResponse({ status: 'ok', deleted });
 }
 
 /**
