@@ -187,9 +187,10 @@ h3 {
   letter-spacing: -0.01em;
 }
 
-/* Typeform-style per-question pages: each .field inside a section is its own viewport-height page. */
+/* Typeform-style per-question pages: each .field inside a section is its own viewport-height page.
+   Use 100dvh so the mobile URL bar doesn't push the last page's content (incl. the submit row) below the visible viewport. */
 .section > .field {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -200,6 +201,13 @@ h3 {
   border-top: 1px solid var(--border);
 }
 .section > .field:first-of-type { border-top: none; }
+/* Last question page: leave room below for the submit row so the button is reachable in portrait without
+   relying on extra document tail (the mobile URL bar otherwise hides it). */
+.section:last-of-type > .field:last-of-type {
+  min-height: auto;
+  justify-content: flex-start;
+  padding-bottom: 24px;
+}
 
 /* Section heading shown above the first .field of each section (rendered inline in HTML). */
 .page-header {
@@ -309,7 +317,9 @@ html {
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .container { padding: 32px 16px 80px; }
-  .section > .field { min-height: 100vh; padding: 24px 0 64px; }
+  .section > .field { min-height: 100dvh; padding: 24px 0 64px; }
+  .section:last-of-type > .field:last-of-type { min-height: auto; padding-bottom: 16px; }
+  .submit-row { margin-top: 24px; padding-top: 20px; padding-bottom: 24px; }
   .page-header { margin-bottom: 20px; }
   .page-header h2 { font-size: 22px; }
   .page-header .section-eyebrow { font-size: 10px; }
